@@ -30,7 +30,6 @@ commands:
   composite:
     commands:
     - build-image
-    - k8s-deployment
     - k8s-service
     - k8s-ingress
     group:
@@ -45,9 +44,6 @@ commands:
 - id: k8s-service
   apply:
     component: outerloop-service
-- id: k8s-ingress
-  apply:
-    component: outerloop-ingress
 - exec:
     commandLine: npm install
     component: runtime
@@ -89,34 +85,6 @@ components:
       rootRequired: false
       uri: ./Dockerfile
     imageName: "{{CONTAINER_IMAGE}}"
-- name: outerloop-deployment
-  kubernetes:
-    inlined: |
-      kind: Deployment
-      apiVersion: apps/v1
-      metadata:
-        name: {{RESOURCE_NAME}}
-      spec:
-        replicas: 1
-        selector:
-          matchLabels:
-            app: {{RESOURCE_NAME}}
-        template:
-          metadata:
-            labels:
-              app: {{RESOURCE_NAME}}
-          spec:
-            containers:
-              - name: {{RESOURCE_NAME}}
-                image: {{CONTAINER_IMAGE}}
-                ports:
-                  - name: http
-                    containerPort: {{CONTAINER_PORT}}
-                    protocol: TCP
-                resources:
-                  limits:
-                    memory: "1024Mi"
-                    cpu: "500m"
 - name: outerloop-service
   kubernetes:
     inlined: |
@@ -133,25 +101,6 @@ components:
         selector:
           app: {{RESOURCE_NAME}}
         type: ClusterIP
-- name: outerloop-ingress
-  kubernetes:
-    inlined: |
-      apiVersion: networking.k8s.io/v1
-      kind: Ingress
-      metadata:
-        name: {{RESOURCE_NAME}}
-      spec:
-        rules:
-          - host: "{{DOMAIN_NAME}}"
-            http:
-              paths:
-                - path: "/"
-                  pathType: Prefix
-                  backend:
-                    service:
-                      name: {{RESOURCE_NAME}} 
-                      port:
-                        number: {{CONTAINER_PORT}}
 - container:
     endpoints:
     - name: http-3000
