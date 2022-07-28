@@ -1,1 +1,2 @@
-reference: https://raw.githubusercontent.com/che-incubator/che-code/main/devfile.yaml
+id: che-incubator/che-code/insiders
+registryUrl: https://eclipse-che.github.io/che-plugin-registry/main/v3
