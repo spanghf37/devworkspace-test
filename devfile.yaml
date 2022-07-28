@@ -20,7 +20,7 @@ starterProjects:
   name: nodejs-starter
 
 variables:
-  CONTAINER_IMAGE: quay.io/MYUSERNAME/nodejs-odo-example
+  CONTAINER_IMAGE: quay.io/centos7/nodejs-14-centos7:latest
   RESOURCE_NAME: my-nodejs-app
   CONTAINER_PORT: "3000"
   DOMAIN_NAME: nodejs.example.com
