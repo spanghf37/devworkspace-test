@@ -1,2 +1,7 @@
 id: che-incubator/che-code/insiders
-registryUrl: https://eclipse-che.github.io/che-plugin-registry/main/v3
+reference: https://raw.githubusercontent.com/eclipse-che/che-plugin-registry/main/che-editors.yaml
+override:
+  components:
+      - name: che-code-injector
+        container:
+          image: 'image-registry.openshift-image-registry.svc:5000/developer-devspaces/che-incubator-che-code:sha256:297ee6d7414034288e080856dd5a8656f9f4966b707f6c60df7929dd886a35ef'
