@@ -1,4 +1,6 @@
 {
-  "extensions.autoCheckUpdates": false,
-  "extensions.autoUpdate": false
+  "settings-key": {
+    "extensions.autoCheckUpdates": false,
+    "extensions.autoUpdate": false
+  }
 }
